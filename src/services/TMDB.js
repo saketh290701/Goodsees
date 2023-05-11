@@ -9,6 +9,7 @@ export const tmdbApi = createApi({
   reducerPath: 'tmdbApi',
   baseQuery: fetchBaseQuery({ baseUrl: 'https://api.themoviedb.org/3' }),
   endpoints: (builder) => ({
+    // Endpoints
     getGenres: builder.query({
       query: () => `genre/movie/list?api_key=${tmdbApiKey}`,
     }),
@@ -44,6 +45,14 @@ export const tmdbApi = createApi({
     getRecommendations: builder.query({
       query: ({ movie_id, list }) => `/movie/${movie_id}/${list}?api_key=${tmdbApiKey}`,
     }),
+
+    getActorInfo: builder.query({
+      query: (id) => `person/${id}?api_key=${tmdbApiKey}`,
+    }),
+
+    getMoviesByActor: builder.query({
+      query: ({ id, page }) => `/discover/movie?with_cast=${id}&page=${page}&api_key=${tmdbApiKey}`,
+    }),
   }),
 });
 
@@ -52,4 +61,6 @@ export const {
   useGetGenresQuery,
   useGetMovieInfoQuery,
   useGetRecommendationsQuery,
+  useGetActorInfoQuery,
+  useGetMoviesByActorQuery,
 } = tmdbApi;
