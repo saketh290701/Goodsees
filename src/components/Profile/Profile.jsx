@@ -1,51 +1,40 @@
-/* eslint-disable no-trailing-spaces */
-/* eslint-disable no-unused-vars */
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { Box, Typography, Button } from '@mui/material';
+import React, { useEffect } from 'react';
+import { Box, Button, Typography } from '@mui/material';
 import { ExitToApp } from '@mui/icons-material';
+import { useSelector } from 'react-redux';
 
-import { userSelector } from '../../features/auth';
+import { useGetListQuery } from '../../services/TMDB';
+import RatedCards from '../RatedCards/RatedCards';
 
 function Profile() {
-  const { user } = useSelector(userSelector);
-  const favMovies = [];
+  const { user } = useSelector((state) => state.user);
+  const { data: favoriteMovies, refetch: refetchFavorites } = useGetListQuery({ listName: 'favorite/movies', accountId: user.id, sessionId: localStorage.getItem('session_id'), page: 1 });
+  const { data: watchlistMovies, refetch: refetchWatchlisted } = useGetListQuery({ listName: 'watchlist/movies', accountId: user.id, sessionId: localStorage.getItem('session_id'), page: 1 });
 
-  const logOut = () => {
+  useEffect(() => {
+    refetchFavorites();
+    refetchWatchlisted();
+  }, []);
+
+  const logout = () => {
     localStorage.clear();
     window.location.href = '/';
   };
 
   return (
     <Box>
-      <Box
-        display="flex"
-        justifyContent="space-between"
-      >
-        <Typography
-          variant="h4"
-          gutterBottom
-        >
-          My Profile
-        </Typography>
-
-        <Button
-          color="inherit"
-          onClick={logOut}
-        >
-          LogOut &nbsp; <ExitToApp />
+      <Box display="flex" justifyContent="space-between">
+        <Typography variant="h4" gutterBottom>My Profile</Typography>
+        <Button color="inherit" onClick={logout}>
+          Logout &nbsp; <ExitToApp />
         </Button>
       </Box>
-
-      {!favMovies.length
-        ? (
-          <Typography variant="h5">
-            Add favourite movies or watchList some movies to see them here!
-          </Typography>
-        )
+      {!favoriteMovies?.results?.length && !watchlistMovies?.results?.length
+        ? <Typography variant="h5">Add favourite or watchlist same movies to see them here!</Typography>
         : (
           <Box>
-            FAVOURITE MOVIES
+            <RatedCards title="Favorite Movies" data={favoriteMovies} />
+            <RatedCards title="Watchlist " data={watchlistMovies} />
           </Box>
         )}
     </Box>

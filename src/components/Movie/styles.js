@@ -12,9 +12,9 @@ export default makeStyles((theme) => ({
     whiteSpace: 'nowrap',
     overflow: 'hidden',
     marginTop: '10px',
-    marginBottom: '0px',
+    marginBottom: 0,
     textAlign: 'center',
-    textDecoration: 'none',
+
   },
   links: {
     alignItems: 'center',
@@ -22,6 +22,7 @@ export default makeStyles((theme) => ({
     textDecoration: 'none',
     [theme.breakpoints.up('xs')]: {
       display: 'flex',
+      flexDirection: 'column',
       textDecoration: 'none',
     },
     '&:hover': {

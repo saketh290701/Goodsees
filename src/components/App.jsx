@@ -15,7 +15,7 @@ function App() {
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <Switch>
-          <Route exact path="/">
+          <Route exact path={['/', '/approved']}>
             <Movies />
           </Route>
           <Route exact path="/movie/:id">
