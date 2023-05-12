@@ -8,12 +8,13 @@ import { ArrowBack } from '@mui/icons-material';
 import { useGetActorInfoQuery, useGetMoviesByActorQuery } from '../../services/TMDB';
 import useStyles from './styles';
 import MovieList from '../MovieList/MovieList';
+import Pagination from '../pagination/pagination';
 
 function Actors() {
   const { id } = useParams();
   const history = useHistory();
   const classes = useStyles();
-  const page = 1;
+  const [page, setPage] = useState(1);
 
   const { data, isFetching, error } = useGetActorInfoQuery(id);
   const { data: actorStarredMovies } = useGetMoviesByActorQuery({ id, page });
@@ -82,6 +83,7 @@ function Actors() {
         <Typography variant="h2" gutterBottom align="center">Movies</Typography>
         {actorStarredMovies && <MovieList movies={actorStarredMovies} numberOfMovies={12} />}
       </Box>
+      <Pagination currentPage={page} setPage={setPage} totalPages={actorStarredMovies?.total_pages} />
     </>
   );
 }

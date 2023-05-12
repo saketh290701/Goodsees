@@ -35,6 +35,7 @@ function Movie(movieProp, index) {
           <Rating readOnly value={movie.vote_average / 2} precision={0.1} />
         </div>
       </Tooltip>
+
     </Grid>
   );
 }

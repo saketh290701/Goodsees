@@ -10,7 +10,7 @@ export default makeStyles((theme) => ({
     // backGroundColor: '#6F0034',
     marginLeft: '240px',
     [theme.breakpoints.down('sm')]: {
-      marginLeft: 0,
+      marginLeft: '0px',
       flexWrap: 'wrap',
 
     },

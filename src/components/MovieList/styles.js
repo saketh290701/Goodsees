@@ -3,10 +3,11 @@ import { makeStyles } from '@mui/styles';
 export default makeStyles((theme) => ({
   moviesContainer: {
     display: 'flex',
-    flexWrap: 'wrap',
     justifyContent: 'space-between',
+    flexWrap: 'wrap',
+
     [theme.breakpoints.down('sm')]: {
-      justifyContent: 'center',
+      justifyContent: 'center !important',
     },
   },
 }));
