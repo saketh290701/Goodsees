@@ -1,12 +1,17 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import React from 'react';
+import React, { useRef } from 'react';
 import { CssBaseline } from '@mui/material';
 import { Route, Switch } from 'react-router-dom';
 import useStyles from './styles';
 import { Actors, Movies, Navbar, MovieInformation, Profile } from '.';
 
+import useAlan from './Alan';
+
 function App() {
   const classes = useStyles();
+
+  const alanBtnContainer = useRef();
+  useAlan();
 
   return (
     <div className={classes.root}>
@@ -29,6 +34,7 @@ function App() {
           </Route>
         </Switch>
       </main>
+      <div ref={alanBtnContainer} />
     </div>
   );
 }

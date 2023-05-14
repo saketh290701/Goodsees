@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import ReactDOM from 'react-dom/client';
@@ -7,6 +8,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Provider } from 'react-redux';
 
 import './index.css';
+import ToggleColorModeProvider from './utils/ToggleColorMode';
 import App from './components/App';
 import store from './app/store';
 
@@ -16,12 +18,15 @@ root.render(
 
   <Provider store={store}>
 
-    <ThemeProvider theme={theme}>
+    {/* <ThemeProvider theme={theme}> */}
+    <ToggleColorModeProvider>
 
       <BrowserRouter>
         <App />
       </BrowserRouter>
-    </ThemeProvider>
+
+    </ToggleColorModeProvider>
+    {/* </ThemeProvider> */}
 
   </Provider>,
 

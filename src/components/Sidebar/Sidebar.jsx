@@ -27,6 +27,10 @@ function Sidebar({ setMobileOpen }) {
   const { genreIdOrCategoryName } = useSelector((state) => state.currentGenreOrCategory);
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [genreIdOrCategoryName]);
+
   return (
     // eslint-disable-next-line react/jsx-no-useless-fragment
     <>
@@ -56,7 +60,7 @@ function Sidebar({ setMobileOpen }) {
               button
             >
               <ListItemIcon>
-                <img src={genreIcons[label.toLowerCase()]} className={classes.genreImages} height={30} width={30} />
+                <img src={genreIcons[label.toLowerCase()]} className={classes.genreImage} height={30} width={30} />
               </ListItemIcon>
               <ListItemText primary={label} />
             </ListItem>
@@ -84,7 +88,7 @@ function Sidebar({ setMobileOpen }) {
               button
             >
               <ListItemIcon>
-                <img src={genreIcons[name.toLowerCase()]} className={classes.genreImages} height={30} width={30} />
+                <img src={genreIcons[name.toLowerCase()]} className={classes.genreImage} height={30} width={30} />
               </ListItemIcon>
               <ListItemText primary={name} />
             </ListItem>
